@@ -1,0 +1,97 @@
+body {
+  height: 100vh;
+  margin: 1px;
+  background: #b24592; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f15f79,
+    #b24592
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f15f79,
+    #b24592
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: "Orbitron", sans-serif;
+  color: rgb(66, 64, 64);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.message {
+  text-align: center;
+  font-size: 2rem;
+}
+.game-container {
+  display: grid;
+  grid-template-columns: repeat(4, 8rem);
+  grid-template-rows: repeat(5, 8rem);
+  grid-gap: 2rem;
+  /* container should have this property*/
+  perspective: 800px;
+}
+.theCard {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.face,
+.back {
+  position: absolute;
+}
+.back {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 10px;
+  backface-visibility: hidden;
+}
+.transform {
+  transform: rotateY(180deg);
+}
+@media screen and (max-width: 690px) {
+  .game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 6rem);
+    grid-template-rows: repeat(5, 6rem);
+    grid-gap: 2rem;
+  }
+}
+@media screen and (max-width: 530px) {
+  .game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 5rem);
+    grid-template-rows: repeat(5, 5rem);
+    grid-gap: 2rem;
+  }
+}
+@media screen and (max-width: 465px) {
+  .game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 4rem);
+    grid-template-rows: repeat(5, 4rem);
+    grid-gap: 1.2rem;
+  }
+}
+@media screen and (max-width: 355px) {
+  img {
+    width: 42px;
+    height: 42px;
+  }
+  .game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 3rem);
+    grid-template-rows: repeat(5, 3em);
+    grid-gap: 1.2rem;
+  }
+}
