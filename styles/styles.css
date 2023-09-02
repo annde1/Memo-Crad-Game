@@ -85,8 +85,8 @@ h1 {
 }
 @media screen and (max-width: 355px) {
   img {
-    width: 42px;
-    height: 42px;
+    width: 39px;
+    height: 39px;
   }
   .game-container {
     display: grid;
