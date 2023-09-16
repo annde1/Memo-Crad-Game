@@ -127,46 +127,48 @@ let player = new Player(8);
 let game = new Game("game-container");
 game.generateCard();
 
-// Event listener for card clicks within the game container
-game.gameContainer.addEventListener("click", (e) => {
-  //Getting the element from which generated the event (event delegation to the parent container)
-  const card = e.target.closest(".theCard");
-  //If it exists then do stuff:
-  if (card) {
-    //Toggle the animation
-    card.classList.toggle("transform");
-    //Play the sound
-    sound.play();
-    //Add the class flipped to it so we can keep track which cards where clicked
-    card.classList.add("flipped");
-    const flipped = Array.from(document.querySelectorAll(".flipped"));
-    //If we clicked two cards run the check
-    if (flipped.length === 2) {
-      //if the method checkCards returns true:
-      if (game.checkCards(flipped)) {
-        //Remove the flipped class form the card and prevent from clicking on it again
-        flipped.forEach((card) => {
-          card.classList.remove("flipped");
-          card.style.pointerEvents = "none";
-        });
-      } else {
-        //If the method checkCards returned false(cards didn't match) then remove the flipped class from the card and make the animation
-        flipped.forEach((card) => {
-          card.classList.remove("flipped");
-          setTimeout(() => card.classList.remove("transform"), 1000);
-        });
-        //Decrease player's score
-        player.decreaseLive();
-        playerLives.innerHTML = `Score: ${player.lives}`;
-        //Check if player is out of lives and reset the game
-        if (player.isOutOfLives()) {
+window.addEventListener("load", () => {
+  // Event listener for card clicks within the game container
+  game.gameContainer.addEventListener("click", (e) => {
+    //Getting the element from which generated the event (event delegation to the parent container)
+    const card = e.target.closest(".theCard");
+    //If it exists then do stuff:
+    if (card) {
+      //Toggle the animation
+      card.classList.toggle("transform");
+      //Play the sound
+      sound.play();
+      //Add the class flipped to it so we can keep track which cards where clicked
+      card.classList.add("flipped");
+      const flipped = Array.from(document.querySelectorAll(".flipped"));
+      //If we clicked two cards run the check
+      if (flipped.length === 2) {
+        //if the method checkCards returns true:
+        if (game.checkCards(flipped)) {
+          //Remove the flipped class form the card and prevent from clicking on it again
+          flipped.forEach((card) => {
+            card.classList.remove("flipped");
+            card.style.pointerEvents = "none";
+          });
+        } else {
+          //If the method checkCards returned false(cards didn't match) then remove the flipped class from the card and make the animation
+          flipped.forEach((card) => {
+            card.classList.remove("flipped");
+            setTimeout(() => card.classList.remove("transform"), 1000);
+          });
+          //Decrease player's score
+          player.decreaseLive();
+          playerLives.innerHTML = `Score: ${player.lives}`;
+          //Check if player is out of lives and reset the game
+          if (player.isOutOfLives()) {
+            resetGame();
+          }
+        }
+        //If player won, reset the game
+        if (checkIfWon()) {
           resetGame();
         }
       }
-      //If player won, reset the game
-      if (checkIfWon()) {
-        resetGame();
-      }
     }
-  }
+  });
 });
